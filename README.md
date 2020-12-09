@@ -4,16 +4,14 @@ Les différentes étapes de la conception de ce projet :
 
 - Etape 1 : ecrire un script qui se rend sur une des pages produits du site et exporte ses données:
     - product_page_url
-    - universal_ product_code (upc)
     - title
-    - price_including_tax
-    - price_excluding_tax
-    - number_available
+    - autor
+    - price
     - product_description
+    - resume
     - category
-    - review_rating
     - image_url
-    Et les inscrit dans un fichier .csv
+    Inscrit ces colonnes et les données correspondant dans un fichier csv
 
 - Etape 2 : Ecrire un script qui récupère les URLs de toutes une catégorie et les inscrit dans un fichier csv
 
