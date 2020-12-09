@@ -14,5 +14,20 @@ body = parser.body
 product_page_url = url
 titre = body.find(itemprop="name")
 print(titre.text)
+autor = body.find(itemprop="author")
+print(autor.text)
+price = body.find(itemprop="price")
+print(price.text)
+product_description = body.find(id="fiche-technique")
+print(product_description.text)
+resume = body.find(itemprop="description")
+print(resume.text)
+collection = body.find("p", {"class":"collections text-gray text-mulit-light"})
+collection = collection.find("a", {"class":"text-gray"})
+print(collection.text)
+image_url = body.find("picture")
+image_url = "https://www.lalibrairie.com" + image_url.img['src']
+print(image_url)
+
 
 fichier_data.close()

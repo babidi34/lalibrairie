@@ -9,7 +9,7 @@ Les différentes étapes de la conception de ce projet :
     - price
     - product_description
     - resume
-    - category
+    - collection
     - image_url
     Inscrit ces colonnes et les données correspondant dans un fichier csv
 
