@@ -55,7 +55,9 @@ fichier_data.close()
 
 # On lit maintenant le fichier
 
-fichier_a_lire = open("data.csv", 'r', newline="")
+fichier_a_lire = open("page_produit_data.csv", 'r', newline="")
 lire = csv.reader(fichier_a_lire,delimiter=';')
 for row in lire:
     print(row)
+
+fichier_a_lire.close()
