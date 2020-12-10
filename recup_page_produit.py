@@ -1,7 +1,7 @@
-import requests
+import requests, csv
 from bs4 import BeautifulSoup
 
-fichier_data = open("data.csv","w")
+fichier_data = open("page_produit_data.csv","w")
 headers = {'User-Agent': 'Mozilla/5.0'}
 url = "https://www.lalibrairie.com/livres/des-ailes-d-argent--la-vengeance-d-une-femme-est-douce-et-impitoyable_0-6872120_9782330138516.html"
 response = requests.get(url,headers=headers)
@@ -10,24 +10,52 @@ response = requests.get(url,headers=headers)
 parser = BeautifulSoup(response.content, 'html.parser')
 body = parser.body
 
-# on récupère nos data et on les place dans des variables
-product_page_url = url
+# on récupère nos data et on les place dans des variables puis
+# on insère les datas dans les bonnes colonnes
+fichier_data.write('Url de la page ; Titre ; Auteur ; \
+Prix ; Description ; Resumé ; Collection ; Url image \n')
+
+product_page_url = url + " ;"
+fichier_data.write(product_page_url)
+
 titre = body.find(itemprop="name")
-print(titre.text)
+titre = titre.text + " ;"
+fichier_data.write(titre)
+
 autor = body.find(itemprop="author")
-print(autor.text)
+autor = autor.text + " ;"
+fichier_data.write(autor)
+
 price = body.find(itemprop="price")
-print(price.text)
+price = price.text + " ;"
+fichier_data.write(price)
+
 product_description = body.find(id="fiche-technique")
-print(product_description.text)
+product_description = product_description.text.strip().replace('\n','')
+product_description = product_description + " ;"
+product_description = product_description.replace('  ',' ')
+fichier_data.write(product_description)
+
 resume = body.find(itemprop="description")
-print(resume.text)
+resume = resume.text + " ;"
+fichier_data.write(resume)
+
 collection = body.find("p", {"class":"collections text-gray text-mulit-light"})
 collection = collection.find("a", {"class":"text-gray"})
-print(collection.text)
+collection = collection.text + " ;"
+fichier_data.write(collection)
+
 image_url = body.find("picture")
 image_url = "https://www.lalibrairie.com" + image_url.img['src']
-print(image_url)
+image_url = image_url + " ;"
+fichier_data.write(image_url)
 
 
 fichier_data.close()
+
+# On lit maintenant le fichier
+
+fichier_a_lire = open("data.csv", 'r', newline="")
+lire = csv.reader(fichier_a_lire,delimiter=';')
+for row in lire:
+    print(row)
